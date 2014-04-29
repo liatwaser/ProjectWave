@@ -18,10 +18,10 @@ class TweetMachine extends Thread
     wait = 30000;
     running = false;
 
-    cb.setOAuthConsumerKey("yMu6xAdYi45NnVq9eyfrQ6Hkj");
-    cb.setOAuthConsumerSecret("sJfcE26S6AWr6udvgNqMGuZIlsAHDUTabYxLf3nwmVpYnNqpxS");
-    cb.setOAuthAccessToken("2458473169-jqlL3p2akwGMI0X1ZnjiH0iZ2H2MaOChDCKR0Bl");
-    cb.setOAuthAccessTokenSecret("iGXK4059gNkVlmGT3VoTYZvIPrh0G387UnL5D1HqOE8tI");
+    cb.setOAuthConsumerKey("**********");
+    cb.setOAuthConsumerSecret("**********");
+    cb.setOAuthAccessToken("**********");
+    cb.setOAuthAccessTokenSecret("**********");
 
     twitterInstance = new TwitterFactory(cb.build()).getInstance();
     queryForTwitter = new Query(queryText);
