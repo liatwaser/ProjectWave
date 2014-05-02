@@ -7,6 +7,9 @@ class Wave
 
   float movingUp = -2.0;
   float movingDown = 2.5;
+  float movingDown2 = 2.5;
+
+  float movingAround = -4.75;
 
   boolean startEnv = false;
 
@@ -27,7 +30,10 @@ class Wave
   boolean timerSet = false;
   int initialTime = 0;
 
-  int maxEnvelopeTime = 60000;
+  int maxDesTime = 30000; //30 sec, for the waveDescend function  
+  //int maxEnvelopeTime = 60000;
+
+
 
 
   String waveText = "Hey, I'm a tweet.";
@@ -77,7 +83,7 @@ class Wave
   void waveAppear3() // wave3 moves up 
   {
     yOffset += movingUp;
-    if (yOffset == height- waveHeight*3)
+    if (yOffset == height- waveHeight*2.5)
     {
       movingUp = 0;
     }
@@ -86,7 +92,7 @@ class Wave
   void waveAppear4() // wave4 moves up 
   {
     yOffset += movingUp;
-    if (yOffset == height- waveHeight*3.5)
+    if (yOffset == height- waveHeight*3)
     {
       movingUp = 0;
     }
@@ -95,7 +101,7 @@ class Wave
   void waveAppear5() // wave5 moves up 
   {
     yOffset += movingUp;
-    if (yOffset == height- waveHeight*4)
+    if (yOffset == height- waveHeight*3.5)
     {
       movingUp = 0;
     }
@@ -104,7 +110,7 @@ class Wave
   void waveAppear6() 
   {
     yOffset += movingUp;
-    if (yOffset == height-waveHeight*4.5)
+    if (yOffset == height-waveHeight*4)
     {
       movingUp = 0;
     }
@@ -113,7 +119,7 @@ class Wave
   void waveAppear7()  
   {
     yOffset += movingUp;
-    if (yOffset == height-waveHeight*5)
+    if (yOffset == height-waveHeight*4.5)
     {
       movingUp = 0;
     }
@@ -122,7 +128,7 @@ class Wave
   void waveAppear8() // wave8 moves up 
   {
     yOffset += movingUp;
-    if (yOffset == height-waveHeight*5.5)
+    if (yOffset == height-waveHeight*5)
     {
       movingUp = 0;
     }
@@ -131,7 +137,7 @@ class Wave
   void waveAppear9() // wave9 moves up 
   {
     yOffset += movingUp;
-    if (yOffset == height-waveHeight*6)
+    if (yOffset == height-waveHeight*5.5)
     {
       movingUp = 0;
     }
@@ -140,7 +146,7 @@ class Wave
   void waveAppear10() // wave10 moves up 
   {
     yOffset += movingUp;
-    if (yOffset == height-waveHeight*6.5)
+    if (yOffset == height-waveHeight*6)
     {
       movingUp = 0;
     }
@@ -150,64 +156,102 @@ class Wave
 
   void waveDescend() // wave moves down 
   {
-    yOffset += movingDown ;
-    if (yOffset == height-waveHeight/2)
-    {
-      movingDown = 0;
-
-      startEnv = true;
-    }
-
+    yOffset += movingDown;
     if (!timerSet)
     {
       initialTime = millis();
       timerSet = true;
-    }
+    } 
     else
     {
-      if ((millis() - initialTime) > maxEnvelopeTime)
+      if 
+        ((millis() - initialTime) > maxDesTime)
       {
-        key5 = false;
-        timerSet = false;
-        startEnv = false;
-        println("finished!");
-        envRange = 1000;
+        movingDown = 0;
+        startEnv = true;
+        yOffset += movingAround; // going up 2
+        //{
+        //movingAround = 0;
+        //        }
+
+        //timerSet = false;
       }
+
+      /*{
+       startEnv = false;
+       println("finished!");
+       envRange = 1000;
+       }*/
     }
   }
 
-  //  void waveEnvRight() {
-  //
-  //    envRange = 1000;
-  //    for (float i = 1000; i > 250; i= i- 0.2)
-  //    {
-  //      envRange= i -0.2;
-  //    }
-  //   
-  //    println(envRange);
-  //  }
+  void backToNormal() 
+  {
+    movingAround = 0; // waves going up stop
+    println("env is", envRange);
 
+    envRange = 1000;
+
+    startEnv = false;
+
+    yOffset += movingDown2;
+    //if (yOffset == height)
+    //{
+    //movingDown2 = 0;
+    //}
+  }
+
+
+  // wave des original //  
+  /*
+   void waveDescend() // wave moves down 
+   {
+   yOffset += movingDown ;
+   if (yOffset == height-waveHeight/2)
+   {
+   movingDown = 0;
+   
+   startEnv = true;
+   }
+   
+   if (!timerSet)
+   {
+   initialTime = millis();
+   timerSet = true;
+   }
+   else
+   {
+   if ((millis() - initialTime) > maxEnvelopeTime)
+   {
+   key5 = false;
+   timerSet = false;
+   startEnv = false;
+   // println("finished!");
+   envRange = 1000;
+   }
+   }
+   }
+   */
+
+  // wave dec original //
 
   void display()
   {
     float wavePos = getCurrentPosition();
 
-
-
     if (startEnv == true)
     {
-      for (float i = 0.02; i<1.03; i= i+ 0.001)
+      for (float i = 0.03; i<1.03; i= i+ 0.001)
       {
         a = a +  i;
       }
       //a += 1.02;
     } 
     else {
-      a += 0.02; // higher value will speed up the wave
+      a += 0.03; // higher value will speed up the wave
     }
     float z = a;
     for (int i=0; i<displayWidth; i=i+10) {
-      //env = abs(i-wavePos) / float(1000);
       env = abs(i-wavePos) / envRange;
       //println("env is:", env);
       x = i+10;
@@ -216,17 +260,14 @@ class Wave
       if (startEnv == true)
       {
         y = yOffset + sin(z) * waveMagnitude * env;
-        //waveEnvRight();
-
-        println("ENV RANGE IS : " + envRange);
-
+        // println("ENV RANGE IS : " + envRange);
         if (envRange > 51)
         {
-          envRange = envRange - 1;
+          envRange = envRange - 0.1;
         }
-      } 
+      }
       else {
-        y = yOffset + sin(z) * waveMagnitude; //* env;   // waves with same effect (waterfall)
+        y = yOffset + sin(z) * waveMagnitude; //* env;
       }
 
       fill(waveColour);
