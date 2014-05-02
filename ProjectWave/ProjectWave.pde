@@ -16,7 +16,6 @@ Wave w10;
 
 ArrayList<Wave> waves;
 
-// these keys are temporary  
 
 float lasTime = 0;
 
@@ -100,7 +99,6 @@ void draw() {
   {
     setWaveColours(color(#06102f), color(#1b4d85), color(#257da2));
   }
-  // ------------- keys that call the waves--------------
 
   if (sec > 1.0)
   {
