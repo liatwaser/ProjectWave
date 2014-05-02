@@ -9,7 +9,7 @@ class Wave
   float movingDown = 2.5;
   float movingDown2 = 2.5;
 
-  float movingAround = -4.75;
+  float movingUp2 = -4.0;
 
   boolean startEnv = false;
 
@@ -30,8 +30,7 @@ class Wave
   boolean timerSet = false;
   int initialTime = 0;
 
-  int maxDesTime = 30000; //30 sec, for the waveDescend function  
-  //int maxEnvelopeTime = 60000;
+  int maxDesTime = 25000; //25 sec, for the waveDescend function  
 
 
 
@@ -169,71 +168,40 @@ class Wave
       {
         movingDown = 0;
         startEnv = true;
-        yOffset += movingAround; // going up 2
-        //{
-        //movingAround = 0;
-        //        }
-
-        //timerSet = false;
+        yOffset += movingUp2; // going up for second time
       }
-
-      /*{
-       startEnv = false;
-       println("finished!");
-       envRange = 1000;
-       }*/
     }
   }
 
   void backToNormal() 
   {
-    movingAround = 0; // waves going up stop
-    println("env is", envRange);
-
     envRange = 1000;
 
     startEnv = false;
+    movingUp2 = 0; // waves going up stop
+    //println("env is", envRange);
+
+    // envRange = 1000;
+
+    //startEnv = false;
 
     yOffset += movingDown2;
-    //if (yOffset == height)
-    //{
-    //movingDown2 = 0;
-    //}
   }
 
 
-  // wave des original //  
-  /*
-   void waveDescend() // wave moves down 
-   {
-   yOffset += movingDown ;
-   if (yOffset == height-waveHeight/2)
-   {
-   movingDown = 0;
-   
-   startEnv = true;
-   }
-   
-   if (!timerSet)
-   {
-   initialTime = millis();
-   timerSet = true;
-   }
-   else
-   {
-   if ((millis() - initialTime) > maxEnvelopeTime)
-   {
-   key5 = false;
-   timerSet = false;
-   startEnv = false;
-   // println("finished!");
-   envRange = 1000;
-   }
-   }
-   }
-   */
+  void resetAll() // function that resets all the variables 
+  {
+    movingUp = -2.0;
+    movingDown = 2.5;
+    movingDown2 = 2.5;
 
-  // wave dec original //
+    movingUp2 = -4.0;
+    timerSet = false;
+
+    yOffset = height + 100;
+    //println( "yoffset is:", yOffset);
+  }
+
 
   void display()
   {

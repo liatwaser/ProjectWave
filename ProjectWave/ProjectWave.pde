@@ -129,89 +129,92 @@ void draw() {
     w10.waveAppear10();
   }
 
-    if (sec >80.0) {
-      for (int i = 0; i < waves.size(); i++)
-      {
-        waves.get(i).waveDescend();
-      }
-    }
-
-    if  (sec >125.0) {   
-      for (int i = 0; i < waves.size(); i++)
-      {
-        waves.get(i).backToNormal();
-      }
-    }
-    
- 
-
-    if (sec > 170.0)     // restart sec timer after 170 secs
+  //if (sec >80.0) {
+    if (sec >180.0) {
+    for (int i = 0; i < waves.size(); i++)
     {
-      lasTime = millis()/1000;
-    }   
-    println("sec is:", sec);
-    //println("lasTime is:", lasTime);
-  } 
-
-
-  //---------------------------------------
-
-
-  //delay(50);
-
-  void setWaveColours(color c1, color c2, color c3)
-  {
-    w1.setWaveColour(c1); // b color
-    w2.setWaveColour(c1); // b color
-    w3.setWaveColour(c1); // b color
-    w4.setWaveColour(c2); // m color 
-    w5.setWaveColour(c2); // m color 
-    w6.setWaveColour(c2); // m color 
-    w7.setWaveColour(c2); // m color 
-    w8.setWaveColour(c3); // t color 
-    w9.setWaveColour (c3); // t color 
-    w10.setWaveColour (c3); // t color
+      waves.get(i).waveDescend();
+    }
   }
-
-
-  //=========================================
-
-
-  void updateTweets()
-  {
-    while (true)
+ /// gap of 40 secs between the two functions - backToNormal stops the former function
+  //if  (sec >125.0) {  
+    if  (sec >220.0) {   
+    for (int i = 0; i < waves.size(); i++)
     {
-
-      if (tweetMachine.tweetsAvailable)
-      {
-        ArrayList latestTweets = tweetMachine.tweets;
-
-        for (int i = 1;i < waves.size();i++)
-        {
-          int tweetNum = i % latestTweets.size();
-          Status t = (Status) latestTweets.get(tweetNum);
-          String msg = t.getText();
-
-          waves.get(i).setWaveText(msg);
-        }
-      }
-
-      delay(30000);
+      waves.get(i).backToNormal();
     }
   }
 
-  //=========================================
-  void setWaveAndBackgroundColours()
+  
+ if (sec > 260.0) 
+  //if (sec > 170.0)     // restart sec timer after 170 secs
   {
-    while (true)
+    for (int i = 0; i < waves.size(); i++)
     {
-      // update wave and background colours
-      for (int i = 0;i < waves.size();i++)
-      {
-        waves.get(i).setWaveColour(color(random(255), random(255), random(255)));
-      }
-
-      delay(30000);
+      waves.get(i).resetAll();
     }
+
+    lasTime = millis()/1000;
+  }   
+  println("sec is:", sec);
+  println("lasTime is:", lasTime);
+} 
+
+
+//---------------------------------------
+
+void setWaveColours(color c1, color c2, color c3)
+{
+  w1.setWaveColour(c1); // b color
+  w2.setWaveColour(c1); // b color
+  w3.setWaveColour(c1); // b color
+  w4.setWaveColour(c2); // m color 
+  w5.setWaveColour(c2); // m color 
+  w6.setWaveColour(c2); // m color 
+  w7.setWaveColour(c2); // m color 
+  w8.setWaveColour(c3); // t color 
+  w9.setWaveColour (c3); // t color 
+  w10.setWaveColour (c3); // t color
+}
+
+//=========================================
+
+
+void updateTweets()
+{
+  while (true)
+  {
+
+    if (tweetMachine.tweetsAvailable)
+    {
+      ArrayList latestTweets = tweetMachine.tweets;
+
+      for (int i = 1;i < waves.size();i++)
+      {
+        int tweetNum = i % latestTweets.size();
+        Status t = (Status) latestTweets.get(tweetNum);
+        String msg = t.getText();
+
+        waves.get(i).setWaveText(msg);
+      }
+    }
+
+    delay(30000);
   }
+}
+
+//=========================================
+void setWaveAndBackgroundColours()
+{
+  while (true)
+  {
+    // update wave and background colours
+    for (int i = 0;i < waves.size();i++)
+    {
+      waves.get(i).setWaveColour(color(random(255), random(255), random(255)));
+    }
+
+    delay(30000);
+  }
+}
 

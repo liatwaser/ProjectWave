@@ -22,7 +22,7 @@ class TweetMachine extends Thread
     cb.setOAuthConsumerSecret("**********");
     cb.setOAuthAccessToken("**********");
     cb.setOAuthAccessTokenSecret("**********");
-    
+        
    
     twitterInstance = new TwitterFactory(cb.build()).getInstance();
     queryForTwitter = new Query(queryText);
