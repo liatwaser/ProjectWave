@@ -11,7 +11,7 @@ class Background
   color cMix2;
 
   int opacity;
-  
+
   color currentColor;
 
   Background(int x_, int y_, float w_, float h_, color cMix1_, color cMix2_) 
@@ -23,15 +23,15 @@ class Background
     cMix1 = cMix1_;
     cMix2 = cMix2_;
     opacity = 255;
-    
-    currentColor = color(255,255,255);
+
+    currentColor = color(255, 255, 255);
   }
 
   void setOpacity(int newOpacity)
   {
     opacity = newOpacity;
   }
-  
+
   color getCurrentColor()
   {
     return currentColor;

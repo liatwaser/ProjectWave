@@ -165,11 +165,6 @@ class BackgroundMachine extends Thread {
           bgAlpha2 = int(255-alpha);
           bgDisplay1 = i;
           bgDisplay2 = i+1;
-
-          //          background.get(i).setOpacity(int(alpha));
-          //          background.get(i).display();
-          //          background.get(i+1).setOpacity(int(255-alpha));
-          //          background.get(i+1).display();
         }
         else if (i == background.size()-1)
         {
@@ -177,11 +172,6 @@ class BackgroundMachine extends Thread {
           bgAlpha2 = int(255-alpha);
           bgDisplay1 = i;
           bgDisplay2 = 0;
-
-          //          background.get(i).setOpacity(int(alpha));
-          //          background.get(i).display();
-          //          background.get(0).setOpacity(int(255-alpha));
-          //          background.get(0).display();
         }
       }
     }

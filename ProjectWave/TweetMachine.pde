@@ -18,17 +18,17 @@ class TweetMachine extends Thread
     wait = 30000;
     running = false;
 
+// Enter API details here
     cb.setOAuthConsumerKey("**********");
     cb.setOAuthConsumerSecret("**********");
     cb.setOAuthAccessToken("**********");
     cb.setOAuthAccessTokenSecret("**********");
-        
-   
+
     twitterInstance = new TwitterFactory(cb.build()).getInstance();
     queryForTwitter = new Query(queryText);
 
     tweetsAvailable = false;
-    
+
     FetchTweets();
 
     start();

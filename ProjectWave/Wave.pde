@@ -9,9 +9,11 @@ class Wave
   float movingDown = 2.5;
   float movingDown2 = 2.5;
 
-  float movingUp2 = -4.0;
+  float movingUp2 = -3.75;
 
   boolean startEnv = false;
+
+  boolean mirrorEnv = false;
 
   float yOffset;
 
@@ -25,14 +27,13 @@ class Wave
 
   float waveInc;
 
-  float envMin = 50;
-
   boolean timerSet = false;
+
+
   int initialTime = 0;
 
+
   int maxDesTime = 25000; //25 sec, for the waveDescend function  
-
-
 
 
   String waveText = "Hey, I'm a tweet.";
@@ -153,7 +154,7 @@ class Wave
 
   // -----------------------------------------------------------------//
 
-  void waveDescend() // wave moves down 
+  void waveDescend() // waves move down 
   {
     yOffset += movingDown;
     if (!timerSet)
@@ -168,26 +169,20 @@ class Wave
       {
         movingDown = 0;
         startEnv = true;
-        yOffset += movingUp2; // going up for second time
+        yOffset += movingUp2; // going up second time
       }
     }
   }
 
   void backToNormal() 
   {
+    movingUp2 = 0;       //waves going up stop
     envRange = 1000;
 
-    startEnv = false;
-    movingUp2 = 0; // waves going up stop
-    //println("env is", envRange);
-
-    // envRange = 1000;
-
-    //startEnv = false;
-
     yOffset += movingDown2;
-  }
 
+    startEnv = false;
+  } 
 
   void resetAll() // function that resets all the variables 
   {
@@ -199,9 +194,7 @@ class Wave
     timerSet = false;
 
     yOffset = height + 100;
-    //println( "yoffset is:", yOffset);
   }
-
 
   void display()
   {
@@ -216,7 +209,7 @@ class Wave
       //a += 1.02;
     } 
     else {
-      a += 0.03; // higher value will speed up the wave
+      a += 0.04; // higher value will speed up the wave
     }
     float z = a;
     for (int i=0; i<displayWidth; i=i+10) {

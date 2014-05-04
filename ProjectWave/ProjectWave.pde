@@ -1,8 +1,13 @@
+/* Project Wave 
+written by Liat Wassershtrom with contributions by Adam Stark 
+for Charmaine Cabancla's project
+May 2014
+*/
+
 BackgroundMachine bm;
 
 TweetMachine tweetMachine;
 
-// Project Wave 
 Wave w1;  // 10 Wave objects 
 Wave w2;
 Wave w3;
@@ -16,7 +21,6 @@ Wave w10;
 
 ArrayList<Wave> waves;
 
-
 float lasTime = 0;
 
 void setup() {
@@ -25,20 +29,20 @@ void setup() {
 
   bm = new BackgroundMachine(); 
 
-  tweetMachine = new TweetMachine("#tweetwave");
+  tweetMachine = new TweetMachine("#tweetwave"); // change this for different search results
 
   waves = new ArrayList();
 
   // object num = of Wave class( y_offset, magnitude, incrementation);
+  // to get different curves change the incremenation 
 
-  w1 = new Wave(height+100, 65, (TWO_PI/20.0)/1.8);
+  w1 = new Wave(height+100, 65, (TWO_PI/20.0)/1.8); 
 
   w2 = new Wave(height+100, 75, (TWO_PI/25.0)/1.8);
   w3 = new Wave(height+100, 90, (TWO_PI/20.0)/1.8);
 
   w4 = new Wave(height+100, 55, (TWO_PI/20.0)/1.8);
 
-  //w5 = new Wave(height/2, 90, (TWO_PI/25.0)/2.7);
   w5 = new Wave(height+100, 75, (PI/25.0)/1.8);
 
   w6 = new Wave(height+100, 70, (TWO_PI/20.0)/1.8);
@@ -78,7 +82,7 @@ void setup() {
 }
 
 void draw() {
-  float sec = millis() /1000.0 - lasTime;
+  float sec = millis() /1000.0 - lasTime; //timer
 
   bm.displayBackground();
 
@@ -129,25 +133,26 @@ void draw() {
     w10.waveAppear10();
   }
 
-  //if (sec >80.0) {
-    if (sec >180.0) {
+//set to start after 15min, change this if you want it to happen sooner/later
+    if (sec >900.0) {  
     for (int i = 0; i < waves.size(); i++)
     {
       waves.get(i).waveDescend();
     }
   }
- /// gap of 40 secs between the two functions - backToNormal stops the former function
-  //if  (sec >125.0) {  
-    if  (sec >220.0) {   
+  
+ // gap of 40 secs between the two functions - backToNormal stops the former function
+// if you change the timing on the previous if statement make sure to change this too
+// leaving 40 seconds between the two.
+    if  (sec >940.0) {   
     for (int i = 0; i < waves.size(); i++)
     {
       waves.get(i).backToNormal();
     }
   }
-
   
- if (sec > 260.0) 
-  //if (sec > 170.0)     // restart sec timer after 170 secs
+  // restart sec timer after 980 secs. This will restart the waves 
+ if (sec > 980.0) 
   {
     for (int i = 0; i < waves.size(); i++)
     {
@@ -156,8 +161,8 @@ void draw() {
 
     lasTime = millis()/1000;
   }   
-  println("sec is:", sec);
-  println("lasTime is:", lasTime);
+  //println("sec is:", sec);
+  //println("lasTime is:", lasTime);
 } 
 
 
